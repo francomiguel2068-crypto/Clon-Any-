@@ -1,0 +1,3 @@
+# SARE - Sistema de Administración Remota de Equipos
+# Solo usa la librería estándar de Python 3.10+
+# No requiere dependencias externas.
