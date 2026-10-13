@@ -1,8 +1,12 @@
+"""Consola de texto (CLI) del servidor SARE.
+
+Usa ServerCore para la red y shared.ui para el estilo de la terminal.
+Para la versión con ventana gráfica, ver server/gui.py.
+"""
 import json
 import os
-import socket
-import threading
-from shared.protocol import create_message, encode, recv_message
+
+from server.core import ServerCore, HOST, PORT
 from shared.ui import (
     BANNER_SERVER, RESET, BOLD, DIM,
     BRIGHT_CYAN, BRIGHT_GREEN, BRIGHT_RED, BRIGHT_YELLOW,
@@ -11,98 +15,55 @@ from shared.ui import (
     hr, print_help_server, print_agent_table,
 )
 
-HOST = "0.0.0.0"
-PORT = 9001
-agents = {}
-agents_lock = threading.Lock()
-next_agent_id = 0
+_LEVEL_FMT = {
+    "info": info,
+    "ok": success,
+    "error": error,
+    "warn": warn,
+}
 
 
-def handle_agent(conn, addr, agent_id):
+def _on_connect(agent_id, addr):
     label = f"{addr[0]}:{addr[1]}"
     print(success(f"Agente {BRIGHT_YELLOW}#{agent_id}{RESET} conectado: {BRIGHT_CYAN}{label}{RESET}"))
-    with agents_lock:
-        agents[agent_id] = {"conn": conn, "addr": addr}
-    try:
-        while True:
-            msg = recv_message(conn)
-            if msg is None:
-                break
-            status = msg.get("status", "")
-            message = msg.get("message", "")
-            if status == "ok":
-                print(arrow_left(
-                    f"{BRIGHT_YELLOW}#{agent_id}{RESET} {DIM}{label}{RESET}  "
-                    f"{BRIGHT_GREEN}●{RESET} {BRIGHT_WHITE}{message}{RESET}"
-                ))
-            elif status == "error":
-                print(arrow_left(
-                    f"{BRIGHT_YELLOW}#{agent_id}{RESET} {DIM}{label}{RESET}  "
-                    f"{BRIGHT_RED}●{RESET} {BRIGHT_RED}{message}{RESET}"
-                ))
-            else:
-                print(arrow_left(
-                    f"{BRIGHT_YELLOW}#{agent_id}{RESET} {DIM}{label}{RESET}  {msg}"
-                ))
-    except (ConnectionResetError, BrokenPipeError, OSError):
-        pass
-    finally:
-        print(warn(f"Agente {BRIGHT_YELLOW}#{agent_id}{RESET} desconectado: {BRIGHT_CYAN}{label}{RESET}"))
-        with agents_lock:
-            agents.pop(agent_id, None)
-        try:
-            conn.close()
-        except OSError:
-            pass
 
 
-def get_agent(agent_id: int):
-    with agents_lock:
-        return agents.get(agent_id)
+def _on_disconnect(agent_id, addr):
+    label = f"{addr[0]}:{addr[1]}"
+    print(warn(f"Agente {BRIGHT_YELLOW}#{agent_id}{RESET} desconectado: {BRIGHT_CYAN}{label}{RESET}"))
 
 
-def send_command(agent_id: int, action: str, payload: dict = None):
-    entry = get_agent(agent_id)
-    if entry:
-        conn = entry["conn"]
-        addr = entry["addr"]
-        label = f"{addr[0]}:{addr[1]}"
-        msg = create_message(action, payload)
-        conn.sendall(encode(msg))
-        extra = f"  {DIM}{json.dumps(payload)}{RESET}" if payload else ""
-        print(arrow_right(
+def _on_message(agent_id, addr, status, message, raw):
+    label = f"{addr[0]}:{addr[1]}"
+    if status == "ok":
+        print(arrow_left(
             f"{BRIGHT_YELLOW}#{agent_id}{RESET} {DIM}{label}{RESET}  "
-            f"{BRIGHT_MAGENTA}▸{RESET} {BRIGHT_WHITE}{action}{RESET}{extra}"
+            f"{BRIGHT_GREEN}●{RESET} {BRIGHT_WHITE}{message}{RESET}"
+        ))
+    elif status == "error":
+        print(arrow_left(
+            f"{BRIGHT_YELLOW}#{agent_id}{RESET} {DIM}{label}{RESET}  "
+            f"{BRIGHT_RED}●{RESET} {BRIGHT_RED}{message}{RESET}"
         ))
     else:
-        print(error(f"Agente {BRIGHT_YELLOW}#{agent_id}{RESET} no encontrado"))
+        print(arrow_left(f"{BRIGHT_YELLOW}#{agent_id}{RESET} {DIM}{label}{RESET}  {raw}"))
 
 
-def broadcast_command(action: str, payload: dict = None):
-    with agents_lock:
-        ids = list(agents.keys())
-    if not ids:
-        print(warn("No hay agentes conectados"))
-        return
-    for aid in ids:
-        send_command(aid, action, payload)
-    print(info(f"Comando {BRIGHT_WHITE}{action}{RESET} enviado a {BRIGHT_CYAN}{len(ids)}{RESET} agente(s)"))
+def _on_sent(agent_id, addr, action, payload):
+    label = f"{addr[0]}:{addr[1]}"
+    extra = f"  {DIM}{json.dumps(payload)}{RESET}" if payload else ""
+    print(arrow_right(
+        f"{BRIGHT_YELLOW}#{agent_id}{RESET} {DIM}{label}{RESET}  "
+        f"{BRIGHT_MAGENTA}▸{RESET} {BRIGHT_WHITE}{action}{RESET}{extra}"
+    ))
 
 
-def kick_agent(agent_id: int):
-    entry = get_agent(agent_id)
-    if entry:
-        addr = entry["addr"]
-        try:
-            entry["conn"].close()
-        except OSError:
-            pass
-        print(info(f"Agente {BRIGHT_YELLOW}#{agent_id}{RESET} {BRIGHT_CYAN}{addr[0]}:{addr[1]}{RESET} desconectado"))
-    else:
-        print(error(f"Agente {BRIGHT_YELLOW}#{agent_id}{RESET} no encontrado"))
+def _on_log(level, text):
+    fmt = _LEVEL_FMT.get(level, info)
+    print(fmt(text))
 
 
-def console_loop():
+def console_loop(server: ServerCore):
     print_help_server()
     prompt = f"  {BRIGHT_GREEN}{BOLD}sare{RESET}{BRIGHT_BLACK} ❯{RESET} "
 
@@ -117,9 +78,7 @@ def console_loop():
             continue
 
         if line == "list":
-            with agents_lock:
-                snapshot = dict(agents)
-            print_agent_table(snapshot)
+            print_agent_table(server.snapshot())
 
         elif line.startswith("sendp "):
             parts = line.split(maxsplit=3)
@@ -131,7 +90,7 @@ def console_loop():
                 except (ValueError, json.JSONDecodeError) as e:
                     print(error(f"Error parseando: {BRIGHT_YELLOW}{e}{RESET}"))
                     continue
-                send_command(aid, action, payload)
+                server.send_command(aid, action, payload)
             else:
                 print(error(f"Uso: {BRIGHT_CYAN}sendp <id> <cmd> <json>{RESET}"))
 
@@ -143,14 +102,14 @@ def console_loop():
                 except ValueError:
                     print(error(f"Uso: {BRIGHT_CYAN}send <id> <comando>{RESET}"))
                     continue
-                send_command(aid, action)
+                server.send_command(aid, action)
             else:
                 print(error(f"Uso: {BRIGHT_CYAN}send <id> <comando>{RESET}"))
 
         elif line.startswith("broadcast "):
             parts = line.split(maxsplit=1)
             if len(parts) == 2:
-                broadcast_command(parts[1])
+                server.broadcast(parts[1])
             else:
                 print(error(f"Uso: {BRIGHT_CYAN}broadcast <comando>{RESET}"))
 
@@ -158,9 +117,12 @@ def console_loop():
             parts = line.split()
             if len(parts) == 2:
                 try:
-                    kick_agent(int(parts[1]))
+                    aid = int(parts[1])
                 except ValueError:
                     print(error(f"Uso: {BRIGHT_CYAN}kick <id>{RESET}"))
+                    continue
+                if server.kick(aid):
+                    print(info(f"Agente {BRIGHT_YELLOW}#{aid}{RESET} desconectado"))
             else:
                 print(error(f"Uso: {BRIGHT_CYAN}kick <id>{RESET}"))
 
@@ -180,33 +142,24 @@ def console_loop():
 
 
 def main():
-    global next_agent_id
     print(BANNER_SERVER)
 
-    srv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    srv.bind((HOST, PORT))
-    srv.listen(30)
+    server = ServerCore(HOST, PORT)
+    server.on_connect = _on_connect
+    server.on_disconnect = _on_disconnect
+    server.on_message = _on_message
+    server.on_sent = _on_sent
+    server.on_log = _on_log
 
-    print(info(
-        f"Servidor escuchando en "
-        f"{BRIGHT_CYAN}{HOST}{RESET}:{BRIGHT_GREEN}{PORT}{RESET}"
-    ))
+    try:
+        server.start()
+    except OSError as e:
+        print(error(f"No se pudo abrir el servidor en el puerto {PORT}: {e}"))
+        return
+
     print(f"  {hr('─', BRIGHT_BLACK)}")
-
-    def accept_loop():
-        global next_agent_id
-        while True:
-            conn, addr = srv.accept()
-            with agents_lock:
-                agent_id = next_agent_id
-                next_agent_id += 1
-            t = threading.Thread(target=handle_agent, args=(conn, addr, agent_id), daemon=True)
-            t.start()
-
-    threading.Thread(target=accept_loop, daemon=True).start()
-    console_loop()
-    srv.close()
+    console_loop(server)
+    server.stop()
 
 
 if __name__ == "__main__":

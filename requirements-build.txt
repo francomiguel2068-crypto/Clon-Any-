@@ -1,0 +1,4 @@
+# Dependencias SOLO para compilar los ejecutables (.exe).
+# Se instalan una vez en el PC que tiene internet; los .exe generados
+# no necesitan nada de esto en los equipos del aula.
+pyinstaller>=6.0
