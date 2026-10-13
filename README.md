@@ -35,6 +35,25 @@ educativos.
 Esta es la forma pensada para tu caso: los PCs del SENA son Windows y no tienen
 internet.
 
+#### Opción fácil: descargar los `.exe` ya compilados (no compilas nada)
+
+El repositorio incluye una automatización (GitHub Actions) que compila los
+ejecutables en un Windows real cada vez que se sube código. Para obtenerlos:
+
+1. Entra al repositorio en GitHub, pestaña **Actions**.
+2. Abre la última ejecución de **"Compilar ejecutables Windows"** (marca verde ✓).
+3. Descarga el artifact **`SARE-Windows`** (un `.zip` con los dos `.exe` y el
+   `sare_agente.ini`).
+
+> Si en su lugar publicas una versión con un *tag* `v1.0`, los `.exe` quedan
+> también en **Releases**, listos para descargar directamente.
+
+Esto se hace una vez en un PC con internet; luego copias el `.zip` por USB y los
+equipos del aula funcionan sin conexión. Si prefieres compilarlos tú mismo, sigue
+la opción manual de abajo.
+
+#### Opción manual: compilar tú mismo
+
 **1. En TU PC (el que sí tiene internet), compila una sola vez.**
    Doble clic en:
 

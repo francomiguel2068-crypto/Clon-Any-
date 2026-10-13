@@ -1,0 +1,56 @@
+name: Compilar ejecutables Windows
+
+# Compila SARE-Servidor.exe y SARE-Agente.exe en un Windows real (runner de
+# GitHub) y los deja listos para descargar. Así nadie tiene que compilar a mano:
+#   - En cada push: los .exe quedan como "Artifact" de la ejecución.
+#   - Al crear un tag v* (p. ej. v1.0): además se publica una Release con los .exe.
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["v*"]
+  workflow_dispatch:   # permite lanzarlo a mano desde la pestaña Actions
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar PyInstaller
+        run: python -m pip install --upgrade pip pyinstaller
+
+      - name: Compilar los ejecutables
+        run: python build/build.py
+
+      - name: Preparar paquete de distribución
+        shell: pwsh
+        run: |
+          Copy-Item README.md dist/ -ErrorAction SilentlyContinue
+
+      - name: Publicar ejecutables como artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SARE-Windows
+          path: |
+            dist/SARE-Servidor.exe
+            dist/SARE-Agente.exe
+            dist/sare_agente.ini
+            dist/README.md
+          if-no-files-found: error
+
+      - name: Publicar Release en tags v*
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/SARE-Servidor.exe
+            dist/SARE-Agente.exe
+            dist/sare_agente.ini
