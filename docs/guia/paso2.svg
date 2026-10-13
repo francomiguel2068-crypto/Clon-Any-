@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 440" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="820" height="440" rx="16" fill="#ffffff"/>
+  <rect x="0.5" y="0.5" width="819" height="439" rx="16" fill="none" stroke="#dde2e8"/>
+  <circle cx="56" cy="60" r="26" fill="#2563eb"/>
+  <text x="56" y="69" fill="#ffffff" font-size="26" font-weight="bold" text-anchor="middle">2</text>
+  <text x="100" y="54" fill="#1d2430" font-size="25" font-weight="bold">En el PC del profesor: abre el servidor</text>
+  <text x="100" y="83" fill="#5b6572" font-size="16">Doble clic en <tspan font-weight="bold" fill="#1d2430">Iniciar-Servidor.bat</tspan>. Arriba te muestra la IP de ese PC.</text>
+
+  <!-- ventana terminal -->
+  <rect x="100" y="130" width="620" height="210" rx="10" fill="#0f1115"/>
+  <rect x="100" y="130" width="620" height="30" rx="10" fill="#1b1f27"/>
+  <rect x="100" y="150" width="620" height="10" fill="#1b1f27"/>
+  <circle cx="120" cy="145" r="5" fill="#f87171"/>
+  <circle cx="138" cy="145" r="5" fill="#fbbf24"/>
+  <circle cx="156" cy="145" r="5" fill="#4ade80"/>
+  <text x="400" y="149" fill="#8b93a1" font-size="12" text-anchor="middle">SARE - Servidor</text>
+  <text x="124" y="192" fill="#e6e6e6" font-size="14" font-family="Menlo, Consolas, monospace">SARE - Servidor (PC del profesor)</text>
+  <text x="124" y="222" fill="#8b93a1" font-size="14" font-family="Menlo, Consolas, monospace">IP de este PC en la red local:</text>
+
+  <rect x="150" y="238" width="260" height="40" rx="8" fill="#13351f" stroke="#1f9d57"/>
+  <text x="170" y="264" fill="#4ade80" font-size="19" font-weight="bold" font-family="Menlo, Consolas, monospace">192.168.1.10</text>
+
+  <text x="124" y="312" fill="#8b93a1" font-size="13" font-family="Menlo, Consolas, monospace">Abriendo la consola del servidor...</text>
+
+  <text x="100" y="392" fill="#1d2430" font-size="16"><tspan font-weight="bold">Anota esa IP.</tspan> Es la que vas a escribir en el otro PC (el del estudiante).</text>
+  <text x="100" y="418" fill="#5b6572" font-size="14">La tuya será parecida (192.168.x.x), no exactamente esta.</text>
+</svg>

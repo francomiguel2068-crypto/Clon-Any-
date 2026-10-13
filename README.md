@@ -38,8 +38,9 @@ Hay lanzadores de **doble clic** (no hay que escribir comandos):
 | `Iniciar-Servidor.bat` | En el PC del profesor. Muestra la IP de ese PC y abre la consola. |
 | `Iniciar-Agente.bat` | En el PC del estudiante. Pide la IP del profesor y se conecta. |
 
-Guía corta en [COMO-PROBAR.txt](COMO-PROBAR.txt). Funcionan tanto con los `.exe`
-como ejecutando el código fuente (si hay Python instalado).
+Guía corta en [COMO-PROBAR.txt](COMO-PROBAR.txt) y **guía visual paso a paso con
+imágenes** en [docs/GUIA-VISUAL.md](docs/GUIA-VISUAL.md). Los lanzadores funcionan
+tanto con los `.exe` como ejecutando el código fuente (si hay Python instalado).
 
 > **Importante para dos PC:** el agente debe apuntar a la **IP del PC del
 > profesor** (ej. `192.168.1.10`), no a `127.0.0.1` (que significa "este mismo

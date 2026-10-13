@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 440" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="820" height="440" rx="16" fill="#ffffff"/>
+  <rect x="0.5" y="0.5" width="819" height="439" rx="16" fill="none" stroke="#dde2e8"/>
+  <circle cx="56" cy="60" r="26" fill="#2563eb"/>
+  <text x="56" y="69" fill="#ffffff" font-size="26" font-weight="bold" text-anchor="middle">3</text>
+  <text x="100" y="54" fill="#1d2430" font-size="25" font-weight="bold">Permite el Firewall de Windows</text>
+  <text x="100" y="83" fill="#5b6572" font-size="16">La primera vez, Windows pregunta. Hay que permitir, o el otro PC no conecta.</text>
+
+  <!-- dialog firewall -->
+  <rect x="190" y="130" width="440" height="220" rx="12" fill="#f4f6f9" stroke="#c6cdd6"/>
+  <rect x="190" y="130" width="440" height="46" rx="12" fill="#ffffff" stroke="#c6cdd6"/>
+  <rect x="190" y="162" width="440" height="14" fill="#ffffff"/>
+  <text x="212" y="159" fill="#1d2430" font-size="15" font-weight="bold">Seguridad de Windows</text>
+
+  <text x="212" y="206" fill="#1d2430" font-size="15">¿Permitir que esta aplicación (Python / SARE)</text>
+  <text x="212" y="228" fill="#1d2430" font-size="15">se comunique en estas redes?</text>
+  <text x="212" y="262" fill="#5b6572" font-size="13">Redes privadas (casa, colegio)</text>
+  <rect x="210" y="274" width="16" height="16" rx="3" fill="#ffffff" stroke="#2563eb"/>
+  <path d="M213 282 l3 3 l6 -7" stroke="#2563eb" stroke-width="2" fill="none"/>
+
+  <rect x="316" y="300" width="150" height="38" rx="8" fill="#1f9d57"/>
+  <text x="391" y="325" fill="#ffffff" font-size="15" font-weight="bold" text-anchor="middle">Permitir acceso</text>
+  <rect x="478" y="300" width="120" height="38" rx="8" fill="#ffffff" stroke="#c6cdd6"/>
+  <text x="538" y="325" fill="#5b6572" font-size="15" text-anchor="middle">Cancelar</text>
+
+  <text x="100" y="394" fill="#1d2430" font-size="16">Elige <tspan fill="#1f9d57" font-weight="bold">Permitir acceso</tspan>. Si no sale el aviso, puedes apagar el Firewall un momento para la prueba.</text>
+</svg>
