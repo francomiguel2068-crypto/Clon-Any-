@@ -1,3 +1,8 @@
 # SARE - Sistema de Administración Remota de Equipos
-# Solo usa la librería estándar de Python 3.10+
-# No requiere dependencias externas.
+#
+# EJECUCIÓN: no requiere ninguna dependencia externa.
+# Todo funciona con la librería estándar de Python 3.10+ (incluida Tkinter
+# para la interfaz gráfica). Por eso los equipos del aula no necesitan internet.
+#
+# COMPILACIÓN a .exe (sólo en el PC que genera los ejecutables, una vez):
+#   pip install -r requirements-build.txt
