@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 440" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="820" height="440" rx="16" fill="#ffffff"/>
+  <rect x="0.5" y="0.5" width="819" height="439" rx="16" fill="none" stroke="#dde2e8"/>
+  <circle cx="56" cy="60" r="26" fill="#2563eb"/>
+  <text x="56" y="69" fill="#ffffff" font-size="26" font-weight="bold" text-anchor="middle">1</text>
+  <text x="100" y="54" fill="#1d2430" font-size="25" font-weight="bold">Primero, pruébalo en un solo PC</text>
+  <text x="100" y="83" fill="#5b6572" font-size="16">Un doble clic abre el servidor y un agente en el mismo computador.</text>
+
+  <!-- archivo .bat -->
+  <g>
+    <rect x="70" y="150" width="210" height="150" rx="12" fill="#f4f7fb" stroke="#c6cdd6"/>
+    <rect x="110" y="178" width="130" height="78" rx="8" fill="#ffffff" stroke="#c6cdd6"/>
+    <text x="175" y="214" fill="#2563eb" font-size="15" font-weight="bold" text-anchor="middle">.bat</text>
+    <text x="175" y="236" fill="#5b6572" font-size="12" text-anchor="middle">doble clic</text>
+    <text x="175" y="286" fill="#1d2430" font-size="14" font-weight="bold" text-anchor="middle">Probar-en-este-PC</text>
+  </g>
+
+  <!-- flecha -->
+  <path d="M300 225 L360 225" stroke="#9aa3ae" stroke-width="3" fill="none"/>
+  <path d="M356 218 L368 225 L356 232 Z" fill="#9aa3ae"/>
+
+  <!-- ventana SARE -->
+  <g>
+    <rect x="390" y="150" width="360" height="210" rx="12" fill="#ffffff" stroke="#dde2e8"/>
+    <rect x="390" y="150" width="360" height="40" rx="12" fill="#ffffff" stroke="#dde2e8"/>
+    <rect x="390" y="178" width="360" height="12" fill="#ffffff"/>
+    <text x="410" y="175" fill="#2563eb" font-size="16" font-weight="bold">SARE</text>
+    <text x="458" y="175" fill="#5b6572" font-size="13">Consola de administración</text>
+    <circle cx="712" cy="170" r="6" fill="#1f9d57"/>
+    <text x="724" y="175" fill="#1d2430" font-size="12">En línea</text>
+
+    <text x="410" y="215" fill="#5b6572" font-size="12" font-weight="bold">EQUIPOS CONECTADOS</text>
+    <line x1="410" y1="224" x2="730" y2="224" stroke="#eef1f4"/>
+    <text x="410" y="250" fill="#5b6572" font-size="12">ID</text>
+    <text x="460" y="250" fill="#5b6572" font-size="12">Dirección</text>
+    <rect x="404" y="262" width="332" height="30" rx="6" fill="#e8f0fe"/>
+    <text x="416" y="282" fill="#1d2430" font-size="13">0</text>
+    <text x="460" y="282" fill="#1d2430" font-size="13">192.168.1.10</text>
+    <circle cx="648" cy="277" r="5" fill="#1f9d57"/>
+    <text x="660" y="282" fill="#1f9d57" font-size="13">En línea</text>
+  </g>
+
+  <text x="100" y="400" fill="#1d2430" font-size="16">Si aparece un equipo <tspan fill="#1f9d57" font-weight="bold">En línea</tspan>, haz clic en él y pulsa un comando. ¡Ya quedó probado!</text>
+</svg>

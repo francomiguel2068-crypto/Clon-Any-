@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 440" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="820" height="440" rx="16" fill="#ffffff"/>
+  <rect x="0.5" y="0.5" width="819" height="439" rx="16" fill="none" stroke="#dde2e8"/>
+  <circle cx="56" cy="60" r="26" fill="#1f9d57"/>
+  <text x="56" y="69" fill="#ffffff" font-size="26" font-weight="bold" text-anchor="middle">5</text>
+  <text x="100" y="54" fill="#1d2430" font-size="25" font-weight="bold">Listo: el equipo aparece En línea</text>
+  <text x="100" y="83" fill="#5b6572" font-size="16">En la ventana del profesor, selecciona el equipo y pulsa un comando.</text>
+
+  <!-- ventana SARE -->
+  <rect x="100" y="120" width="620" height="250" rx="12" fill="#ffffff" stroke="#dde2e8"/>
+  <rect x="100" y="120" width="620" height="40" rx="12" fill="#ffffff" stroke="#dde2e8"/>
+  <rect x="100" y="148" width="620" height="12" fill="#ffffff"/>
+  <text x="120" y="145" fill="#2563eb" font-size="16" font-weight="bold">SARE</text>
+  <circle cx="676" cy="140" r="6" fill="#1f9d57"/>
+  <text x="688" y="145" fill="#1d2430" font-size="12">En línea</text>
+
+  <!-- tabla -->
+  <text x="120" y="188" fill="#5b6572" font-size="12" font-weight="bold">EQUIPOS CONECTADOS</text>
+  <rect x="114" y="198" width="320" height="30" rx="6" fill="#e8f0fe"/>
+  <text x="126" y="218" fill="#1d2430" font-size="13">0</text>
+  <text x="170" y="218" fill="#1d2430" font-size="13">192.168.1.21</text>
+  <circle cx="356" cy="213" r="5" fill="#1f9d57"/>
+  <text x="368" y="218" fill="#1f9d57" font-size="13">En línea</text>
+
+  <!-- comandos -->
+  <text x="470" y="188" fill="#5b6572" font-size="12" font-weight="bold">COMANDOS</text>
+  <rect x="464" y="198" width="240" height="30" rx="6" fill="#ffffff" stroke="#c6cdd6"/>
+  <text x="478" y="218" fill="#1d2430" font-size="13">Enviar mensaje</text>
+  <rect x="464" y="234" width="240" height="30" rx="6" fill="#ffffff" stroke="#c6cdd6"/>
+  <text x="478" y="254" fill="#1d2430" font-size="13">Bloquear pantalla</text>
+
+  <!-- log -->
+  <text x="120" y="256" fill="#5b6572" font-size="12" font-weight="bold">REGISTRO</text>
+  <rect x="114" y="266" width="320" height="86" rx="6" fill="#fbfcfd" stroke="#dde2e8"/>
+  <text x="126" y="288" fill="#1f9d57" font-size="12" font-family="Menlo, Consolas, monospace">Equipo #0 conectado</text>
+  <text x="126" y="308" fill="#1d4ed8" font-size="12" font-family="Menlo, Consolas, monospace">#0  ->  show_msg</text>
+  <text x="126" y="328" fill="#1f9d57" font-size="12" font-family="Menlo, Consolas, monospace">#0  &lt;-  Mensaje mostrado</text>
+
+  <text x="100" y="406" fill="#1d2430" font-size="16">Si ves el intercambio <tspan fill="#1d4ed8" font-weight="bold">-&gt;</tspan> y <tspan fill="#1f9d57" font-weight="bold">&lt;-</tspan> en el registro, ¡funciona entre los dos PC!</text>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 440" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="820" height="440" rx="16" fill="#ffffff"/>
+  <rect x="0.5" y="0.5" width="819" height="439" rx="16" fill="none" stroke="#dde2e8"/>
+  <circle cx="56" cy="60" r="26" fill="#2563eb"/>
+  <text x="56" y="69" fill="#ffffff" font-size="26" font-weight="bold" text-anchor="middle">4</text>
+  <text x="100" y="54" fill="#1d2430" font-size="25" font-weight="bold">En el PC del estudiante: escribe la IP</text>
+  <text x="100" y="83" fill="#5b6572" font-size="16">Doble clic en <tspan font-weight="bold" fill="#1d2430">Iniciar-Agente.bat</tspan> y escribe la IP del profesor (paso 2).</text>
+
+  <!-- terminal -->
+  <rect x="100" y="130" width="620" height="200" rx="10" fill="#0f1115"/>
+  <rect x="100" y="130" width="620" height="30" rx="10" fill="#1b1f27"/>
+  <rect x="100" y="150" width="620" height="10" fill="#1b1f27"/>
+  <circle cx="120" cy="145" r="5" fill="#f87171"/>
+  <circle cx="138" cy="145" r="5" fill="#fbbf24"/>
+  <circle cx="156" cy="145" r="5" fill="#4ade80"/>
+  <text x="400" y="149" fill="#8b93a1" font-size="12" text-anchor="middle">SARE - Agente</text>
+
+  <text x="124" y="194" fill="#8b93a1" font-size="13.5" font-family="Menlo, Consolas, monospace">SARE - Agente (este PC se conectara al profesor)</text>
+  <text x="124" y="238" fill="#e6e6e6" font-size="14" font-family="Menlo, Consolas, monospace">IP del PC del profesor (Enter = este PC):</text>
+  <rect x="150" y="252" width="200" height="34" rx="6" fill="#13351f" stroke="#1f9d57"/>
+  <text x="166" y="275" fill="#4ade80" font-size="17" font-weight="bold" font-family="Menlo, Consolas, monospace">192.168.1.10</text>
+  <rect x="356" y="256" width="2" height="26" fill="#4ade80"/>
+
+  <text x="100" y="388" fill="#c23b3b" font-size="16" font-weight="bold">No dejes 127.0.0.1</text>
+  <text x="256" y="388" fill="#1d2430" font-size="16">— eso significa "este mismo PC" y no conectaría al profesor.</text>
+</svg>

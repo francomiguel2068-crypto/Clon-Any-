@@ -28,6 +28,25 @@ educativos.
 
 ---
 
+## ⚡ Lo más rápido para probar (Windows)
+
+Hay lanzadores de **doble clic** (no hay que escribir comandos):
+
+| Archivo | Para qué |
+|---------|----------|
+| `Probar-en-este-PC.bat` | Abre servidor + agente en el mismo PC y comprueba que todo funciona. |
+| `Iniciar-Servidor.bat` | En el PC del profesor. Muestra la IP de ese PC y abre la consola. |
+| `Iniciar-Agente.bat` | En el PC del estudiante. Pide la IP del profesor y se conecta. |
+
+Guía corta en [COMO-PROBAR.txt](COMO-PROBAR.txt) y **guía visual paso a paso con
+imágenes** en [docs/GUIA-VISUAL.md](docs/GUIA-VISUAL.md). Los lanzadores funcionan
+tanto con los `.exe` como ejecutando el código fuente (si hay Python instalado).
+
+> **Importante para dos PC:** el agente debe apuntar a la **IP del PC del
+> profesor** (ej. `192.168.1.10`), no a `127.0.0.1` (que significa "este mismo
+> PC"). Y si Windows pregunta por el Firewall en el servidor, hay que
+> **"Permitir acceso"**.
+
 ## 🚀 Dos formas de usarlo
 
 ### A) Como ejecutables `.exe` (para los PCs de la escuela, sin internet)

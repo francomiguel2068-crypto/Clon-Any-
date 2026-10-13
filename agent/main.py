@@ -70,17 +70,22 @@ def main():
     print(info(f"Comandos: {BRIGHT_WHITE}{', '.join(actions.COMMAND_HANDLERS)}{RESET}"))
     print(f"  {hr('─')}")
 
+    waiting_notified = False
     try:
         while True:
             sock = _connect_once(host, port)
             if sock is None:
-                print(warn(
-                    f"No hay servidor en {BRIGHT_CYAN}{host}:{port}{RESET} — "
-                    f"reintentando en {RECONNECT_DELAY}s {DIM}(Ctrl+C para salir){RESET}"
-                ))
+                if not waiting_notified:
+                    print(warn(
+                        f"No hay servidor en {BRIGHT_CYAN}{host}:{port}{RESET} — "
+                        f"esperando a que se abra {DIM}(reintento cada {RECONNECT_DELAY}s, "
+                        f"Ctrl+C para salir){RESET}"
+                    ))
+                    waiting_notified = True
                 time.sleep(RECONNECT_DELAY)
                 continue
 
+            waiting_notified = False
             print(success(f"Conectado al servidor {BRIGHT_CYAN}{host}:{port}{RESET}"))
             print(info(f"Esperando comandos...  {DIM}(Ctrl+C para salir){RESET}\n"))
             try:
