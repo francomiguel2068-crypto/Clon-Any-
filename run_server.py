@@ -2,7 +2,11 @@
 
 Por defecto abre la interfaz gráfica. Con --cli abre la consola de texto.
 """
+import os
 import sys
+
+# Silenciar el aviso del Tk antiguo en macOS (inofensivo; no afecta a Windows).
+os.environ.setdefault("TK_SILENCE_DEPRECATION", "1")
 
 
 def main():

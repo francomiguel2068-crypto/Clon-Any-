@@ -12,3 +12,4 @@ build/_pyinstaller/
 
 # Config del agente generada en tiempo de ejecución
 sare_agente.ini
+.venv/

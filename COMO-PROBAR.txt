@@ -1,0 +1,51 @@
+===========================================================
+  SARE - Cómo probar (guía corta)
+===========================================================
+
+PRIMERO: PROBAR EN UN SOLO PC (lo más fácil)
+-----------------------------------------------------------
+1. Doble clic en   Probar-en-este-PC.bat
+2. Se abre la ventana del servidor (SARE) y, a los pocos
+   segundos, en la lista "EQUIPOS CONECTADOS" aparece
+   "Equipo #0 - En línea".
+3. Haz clic en ese equipo y pulsa un comando, por ejemplo
+   "Enviar mensaje". Debe funcionar.
+
+Si aparece el equipo y responde, ¡ya está probado!
+
+
+DESPUÉS: PROBAR ENTRE DOS PC
+-----------------------------------------------------------
+Importante: los dos PC deben estar en la MISMA red
+(mismo Wi-Fi o el mismo cable/switch).
+
+EN EL PC DEL PROFESOR (servidor):
+1. Doble clic en   Iniciar-Servidor.bat
+2. Arriba te muestra la IP de ese PC (ej: 192.168.1.10).
+   ANÓTALA.
+3. Si Windows pregunta por el Firewall, elige
+   "Permitir acceso" (red privada). Esto es obligatorio
+   para que el otro PC se pueda conectar.
+
+EN EL PC DEL ESTUDIANTE (agente):
+4. Doble clic en   Iniciar-Agente.bat
+5. Cuando pregunte la IP, escribe la IP del profesor que
+   anotaste (NO dejes 127.0.0.1) y pulsa Enter.
+6. En la ventana del profesor debe aparecer el equipo
+   "En línea". Selecciónalo y envía un comando.
+
+
+ERRORES COMUNES
+-----------------------------------------------------------
+- "Dice conectado pero no aparece en el servidor":
+  el agente quedó en 127.0.0.1. Eso significa "este mismo
+  PC". Para dos PC hay que poner la IP del PC del profesor.
+
+- "No conecta entre los dos PC":
+  casi siempre es el Firewall de Windows. En el PC del
+  profesor, permite el acceso cuando lo pregunte, o
+  desactívalo un momento para la prueba.
+
+- No están en la misma red (uno por Wi-Fi y otro por otra
+  red distinta). Deben compartir la misma red local.
+===========================================================
